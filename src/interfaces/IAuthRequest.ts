@@ -3,4 +3,5 @@ import { IUserResponse } from "./IUser";
 
 export interface IAuthRequest extends Request {
     tokenUser?: IUserResponse
+    fileValidationError?: string
 }
