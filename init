@@ -1,0 +1,6 @@
+mkdir node-auth-pg-repo
+cd node-auth-pg-repo
+npm init -y
+npm install express pg bcryptjs jsonwebtoken dotenv
+npm install -D typescript ts-node-dev @types/node @types/express @types/jsonwebtoken @types/bcryptjs
+npx tsc --init
