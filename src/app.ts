@@ -14,7 +14,15 @@ app.use("/api/upload", uploadRouter);
 
 
 // Check DB connection
-pool.connect().then(() => console.log("Database connected"));
-getMysqlPool();
+const initDatabase = async () => {
+  try {
+    await pool?.connect();
+    console.log("✅ Database connected successfully");
+  } catch (error: any) {
+    console.log("⚠️ Starting server without DB connection...");
+  }
+  getMysqlPool();
+};
+initDatabase();
 
 export default app;

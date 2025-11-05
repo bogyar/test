@@ -4,31 +4,43 @@ import { Pool } from "pg";
 import dotenv from "dotenv";
 dotenv.config();
 
-export const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  ssl: true,
-});
+export const pgpool = () => {
+  try {
+    return new Pool({
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
+      ssl: true,
+    });
+  } catch (error) {
+    return null;
+  }
+}
+
+export const pool = pgpool();
 
 export const excQueryReturnFirst = async <T>(
   query: string,
   values: any[]
 ): Promise<T> => {
-  const result = await pool.query(query, values);
-  return result.rows[0] || (null as any);
+  const result = await pool?.query(query, values);
+  return result?.rows[0] || (null as any);
 };
 export const excQueryReturnMany = async <T>(
   query: string,
   values: any[]
 ): Promise<T[]> => {
-  const result = await pool.query(query, values);
-  return (result.rows || []) as any[];
+  const result = await pool?.query(query, values);
+  return (result?.rows || []) as any[];
 };
 
-pool.on("connect", () => console.log("Connected to PostgreSQL database"));
+try {
+  pool?.on("connect", () => console.log("Connected to PostgreSQL database"));
+} catch (error) {
+  console.error("Error connecting to PostgreSQL database:", error);
+}
 
 let poolManager: mysql.Pool | null = null;
 
