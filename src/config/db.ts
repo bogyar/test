@@ -15,6 +15,7 @@ export const pgpool = () => {
       ssl: true,
     });
   } catch (error) {
+    console.error("Error connecting to PostgreSQL database:", error);
     return null;
   }
 }
@@ -97,7 +98,6 @@ export const selectFirstQuery = async <T>(
     // console.log(queryString);
     // console.log(variables);
     connection = await getMysqlPool().getConnection(); // Get a connection from the pool
-    debugger;
     const queryResult: any = await connection.query(queryString, variables);
     if (mode == "WRITE") {
       if (queryResult[0].affectedRows > 0) {

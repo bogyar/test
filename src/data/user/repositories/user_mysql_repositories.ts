@@ -20,7 +20,6 @@ export class UserMysqlRepositories extends BaseUserRepositories {
             insertUserQuery,
             values, "WRITE"
         );
-        debugger;
         if (!result) {
             return null;
         }
@@ -70,11 +69,9 @@ export class UserMysqlRepositories extends BaseUserRepositories {
     ): Promise<IUserResponse | null> {
         const fields = [];
         const values: any[] = [];
-        let index = 1;
         for (const [key, value] of Object.entries(data)) {
             fields.push(`${key} = ?`);
             values.push(value);
-            index++;
         }
         values.push(id);
         const updateUserQuery = `UPDATE users SET ${fields.join(
@@ -82,7 +79,8 @@ export class UserMysqlRepositories extends BaseUserRepositories {
         )} WHERE id = ?`;
         let result = await selectFirstQuery<IUserResponse | null>(
             updateUserQuery,
-            values
+            values,
+            "WRITE"
         );
         if(!result){
             return null;
@@ -101,7 +99,8 @@ export class UserMysqlRepositories extends BaseUserRepositories {
         const values = [status, id];
         let result = await selectFirstQuery<IUserResponse | null>(
             updateStatusQuery,
-            values
+            values,
+            "WRITE"
         );
         if(!result){
             return null;

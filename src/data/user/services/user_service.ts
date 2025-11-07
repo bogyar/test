@@ -1,5 +1,4 @@
 import { IUserRequest, IUserResponse } from "../../../interfaces/IUser";
-import { UserRepositories } from "../repositories/user_repositories";
 import bcrypt from "bcryptjs";
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../../../utils/jwt";
 import { BaseUserRepositories } from "../repositories/base_user_repositories";

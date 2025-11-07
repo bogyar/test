@@ -4,3 +4,14 @@ npm init -y
 npm install express pg bcryptjs jsonwebtoken dotenv
 npm install -D typescript ts-node-dev @types/node @types/express @types/jsonwebtoken @types/bcryptjs
 npx tsc --init
+
+
+npm install -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+npm install -D eslint @eslint/js typescript-eslint eslint-plugin-unused-imports
+
+npx eslint 'src/**/*.{ts,tsx}' --fix
+npm run lint
+"scripts": {
+  "lint": "eslint 'src/**/*.{ts,tsx}'"
+}
+

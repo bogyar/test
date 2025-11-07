@@ -92,7 +92,7 @@ export class UserController {
             if(!id){
                 return res.status(400).json({ message: "Id is required" });
             }
-            let userObj:any = {};
+            const userObj:any = {};
             if(name) userObj.name = name;
             if(email) userObj.email = email;
             if(password) userObj.password = password;

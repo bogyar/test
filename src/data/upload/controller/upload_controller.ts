@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { IAuthRequest } from "../../../interfaces/IAuthRequest";
 
 export class UploadController {
@@ -7,7 +7,7 @@ export class UploadController {
             if (req.fileValidationError) {
                 return res.status(400).json({ message: req.fileValidationError });
             }
-            const userid = req.tokenUser?.id;
+            // const userid = req.tokenUser?.id;
             const file = req.file;
             if (!file) return res.status(400).json({ message: "No file uploaded" });
 
@@ -24,7 +24,7 @@ export class UploadController {
             if (req.fileValidationError) {
                 return res.status(400).json({ message: req.fileValidationError });
             }
-            const userid = req.tokenUser?.id;
+            // const userid = req.tokenUser?.id;
             const files = req.files as Express.Multer.File[];
             if (!files) return res.status(400).json({ message: "No files uploaded" });
             res.status(201).json({
